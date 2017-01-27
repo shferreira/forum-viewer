@@ -1,0 +1,31 @@
+<% page = [ 1, params[:page].to_i ].max %>
+<% pages = (1..(page_count)).drop([page - 5, 0].max).take(9) %>
+<% if page_count > 1 %>
+<nav class="pagination" role="navigation">
+  <% if page > 1 %>
+    <a rel="first" href="?page=1">&laquo;</a>
+  <% end %>
+  <% if page - 1 > 0 %>
+    <a rel="prev" href="?page=<%= page - 1 %>">&lsaquo;</a>
+  <% end %>
+  <% if pages.first > 1 %>
+  <span class="ellipsis">...</span>
+  <% end %>
+  <% pages.each do |n| %>
+    <% if n == page %>
+      <a class="active"><%= n %></a>
+    <% else %>
+      <a href="?page=<%= n %>"><%= n %></a>
+    <% end %>
+  <% end %>
+  <% if page_count > pages.last %>
+  <span class="ellipsis">&hellip;</span>
+  <% end %>
+  <% if page + 1 < page_count %>
+    <a rel="next" href="?page=<%= page + 1 %>">&rsaquo;</a>
+  <% end %>
+  <% if !@last_page %>
+    <a rel="last" href="?page=<%= page_count %>">&raquo;</a>
+  <% end %>
+</nav>
+<% end %>

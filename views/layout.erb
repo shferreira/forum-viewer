@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forum</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Lobster:400">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">Forum Access</a></h1>
+  </header>
+  <% if params[:error] %>
+  <div class="error"><%= params[:error] %></div>
+  <% end %>
+  <%= yield %>
+  <footer>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<section>
+  <h2>
+    <a href="/<%= params[:domain] %>"><%= params[:domain] %></a>
+    &gt; <a href="/<%= params[:domain] %>/forum-<%= posts['forum_id'] %>"><%= posts['forum_title'] %></a>
+    &gt; <%= posts['topic_title'] %>
+  </h2>
+  <ul>
+  <% posts['posts'].each do |post| %>
+    <li id="post-<%= post['post_id'] %>">
+      <span>
+        <h3>
+          <a href="#post-<%= post['post_id'] %>">#<%= post['post_count'] %></a>
+          <%= post['post_author_name'] %>
+        </h3>
+        <br>
+        <time><%= ago(post['timestamp']) %></time>
+      </span>
+      <div>
+        <%= format(post['post_content']) %>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+</section>
+<%= erb :_pagination, locals: { page_count: (posts['total_post_num'].to_i / 20) + 1 } %>

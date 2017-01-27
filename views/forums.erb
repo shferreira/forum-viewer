@@ -1,0 +1,24 @@
+<% if forums.any? { |f| !f['sub_only'] } %>
+<section>
+<% if name %>
+<h2><%= name %></h2>
+<% end %>
+<ul>
+<% end %>
+<% forums.each do |forum| %>
+  <% if forum['child'] %>
+    <%= erb :forums, layout: nil, locals: { name: forum['forum_name'], forums: forum['child'] } %>
+  <% else %>
+    <li>
+      <span>
+        <a href="/<%= params[:domain] %>/forum-<%= forum['forum_id'] %>"><%= forum['forum_name'] %></a>
+        <br>
+        <%= forum['description'] != '' ? forum['description'] : forum['forum_name'] %>
+      </span>
+    </li>
+  <% end %>
+<% end %>
+<% if forums.any? { |f| !f['sub_only'] } %>
+</ul>
+</section>
+<% end %>

@@ -1,0 +1,28 @@
+<section>
+  <h2>
+    <a href="/<%= params[:domain] %>"><%= params[:domain] %></a>
+    &gt; <%= topics['forum_name'] %>
+  </h2>
+  <ul>
+  <% if topics['topics'] %>
+    <% topics['topics'].each do |topic| %>
+      <li>
+        <span>
+          <a href="/<%= params[:domain] %>/topic-<%= topic['topic_id'] %>">
+            <%= topic['topic_title'] %>
+          </a>
+          <br>
+          <%= topic['topic_author_name'] %>
+          - <%= topic['reply_number'] %> replies
+          - <time><%= ago(topic['timestamp']) %></time>
+        </span>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+      <span>No topics yet!</span>
+    </li>
+  <% end %>
+  </ul>
+</section>
+<%= erb :_pagination, locals: { page_count: topics['total_topic_num'].to_i / 20 } %>
